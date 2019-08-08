@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 
 // Modules
 import { PagesModule } from './pages/pages.module';
@@ -11,6 +13,8 @@ import { RegisterComponent } from './login/register.component';
 
 // Routes
 import { APP_ROUTES } from './app.routes';
+import { IncrementadorComponent } from './components/incrementador/incrementador.component';
+import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     PagesModule,
+    FormsModule,
     APP_ROUTES
   ],
   providers: [],

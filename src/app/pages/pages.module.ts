@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+// charts
+import { ChartsModule } from 'ng2-charts';
 
 import { PagesComponent } from './pages.component';
 
@@ -9,6 +13,8 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { PAGES_ROUTES } from './pages.routes';
+import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -25,6 +31,9 @@ import { PAGES_ROUTES } from './pages.routes';
     ],
     imports: [
         SharedModule,
+        FormsModule,
+        ChartsModule,
+        ComponentsModule,
         PAGES_ROUTES
     ]
 })
