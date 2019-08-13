@@ -13,8 +13,6 @@ import { RegisterComponent } from './login/register.component';
 
 // Routes
 import { APP_ROUTES } from './app.routes';
-import { IncrementadorComponent } from './components/incrementador/incrementador.component';
-import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.component';
 
 @NgModule({
   declarations: [
