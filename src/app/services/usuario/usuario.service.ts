@@ -2,8 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Usuario } from '../../models/usuario.model';
+
+// config
 import { URL_SERVICIOS } from '../../config/config';
+
+// models
+import { Usuario } from '../../models/usuario.model';
+
+// services
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +20,7 @@ export class UsuarioService {
   token: string;
   usuario: Usuario;
 
-  constructor( private http: HttpClient, private router: Router ) {
+  constructor( private http: HttpClient, private router: Router, private subirArchivoService: SubirArchivoService ) {
     this.cargarStorage();
   }
 
@@ -53,7 +60,7 @@ export class UsuarioService {
     }
     
     return this.http.post(url, usuario).pipe(map( (response: any) => {
-      this.guardarStorage(response.id, response.token, response.usuario);
+      this.guardarStorage(response._id, response.token, response.usuario);
 
       return true;
     } ));
@@ -62,7 +69,7 @@ export class UsuarioService {
   loginGoogle(token: string) {
     const url = `${ URL_SERVICIOS }/login/google`;
     return this.http.post(url, { token }).pipe( map( (response: any) => {
-      this.guardarStorage(response.id, response.token, response.usuario);
+      this.guardarStorage(response._id, response.token, response.usuario);
       return true;
     } ) );
   }
@@ -79,5 +86,30 @@ export class UsuarioService {
 
   estaLogueado() {
     return this.token.length > 5 ? true : false;
+  }
+
+  actualizarUsuario(usuario: Usuario) {
+    console.log(usuario);
+    const url = `${ URL_SERVICIOS }/usuario/${ usuario._id }?token=${ this.token }`;
+
+    return this.http.put(url, usuario).pipe( map( (response: any) => {
+      this.guardarStorage(response.usuario._id, this.token, response.usuario);
+      return response;
+    } ) );
+  }
+
+  cambiarImagen( archivo: File, id: string ) {
+
+    return new Promise( (resolve, reject) => {
+
+      this.subirArchivoService.subirArchivo(archivo, 'usuarios', this.usuario._id).then( (response: any) => {
+        console.log(response, id);
+        this.usuario.img = response.usuario.img;
+        this.guardarStorage(id, this.token, this.usuario);
+        resolve(response);
+      } ).catch( error => {
+        reject(error);
+      } );
+    } );
   }
 }
