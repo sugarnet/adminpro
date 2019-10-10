@@ -15,12 +15,13 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 // my modules
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { ComponentsModule } from '../components/components.module';
 
 import { PAGES_ROUTES } from './pages.routes';
-import { ComponentsModule } from '../components/components.module';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ProfileComponent } from './profile/profile.component';
         AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsuariosComponent
     ],
     exports: [
         DashboardComponent,

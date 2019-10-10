@@ -93,7 +93,9 @@ export class UsuarioService {
     const url = `${ URL_SERVICIOS }/usuario/${ usuario._id }?token=${ this.token }`;
 
     return this.http.put(url, usuario).pipe( map( (response: any) => {
-      this.guardarStorage(response.usuario._id, this.token, response.usuario);
+      if (usuario._id === this.usuario._id) {
+        this.guardarStorage(response.usuario._id, this.token, response.usuario);
+      }
       return response;
     } ) );
   }
@@ -111,5 +113,20 @@ export class UsuarioService {
         reject(error);
       } );
     } );
+  }
+
+  getUsuarios( desde = 0 ) {
+    const url = `${ URL_SERVICIOS }/usuario?desde=${ desde }`;
+    return this.http.get(url);
+  }
+
+  buscarUsuarios( termino: string ) {
+    const url = `${ URL_SERVICIOS }/busqueda/coleccion/usuarios/${ termino }`;
+    return this.http.get(url).pipe( map( (response: any) => response.usuarios ) );
+  }
+  
+  borrarUsuario( id: string ) {
+    const url = `${ URL_SERVICIOS }/usuario/${ id }?token=${ this.token }`;
+    return this.http.delete(url).pipe( map( () => true) );
   }
 }
