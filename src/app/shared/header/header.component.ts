@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/service.index';
 import { Usuario } from 'src/app/models/usuario.model';
 
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   usuario: Usuario;
 
-  constructor( private usuarioService: UsuarioService ) { }
+  constructor( private usuarioService: UsuarioService, private router: Router ) { }
 
   ngOnInit() {
     this.usuario = this.usuarioService.usuario;
@@ -19,6 +20,11 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.usuarioService.logout();
+  }
+
+  buscar( termino: string ) {
+
+    this.router.navigate(['/buscador', termino]);
   }
 
 }

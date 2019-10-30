@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['login']);
         }
       })
-    });
+    }, error => Swal.fire(error.error.message, error.error.errors.message, 'error'));
   }
 
 }

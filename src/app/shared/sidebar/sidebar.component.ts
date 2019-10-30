@@ -12,12 +12,11 @@ export class SidebarComponent implements OnInit {
   menus: any = [];
   usuario: Usuario;
 
-  constructor( private sidebarService: SidebarService, private usuarioService: UsuarioService ) {
-    this.menus = sidebarService.menu;
-  }
+  constructor( private sidebarService: SidebarService, private usuarioService: UsuarioService ) { }
 
   ngOnInit() {
     this.usuario = this.usuarioService.usuario;
+    this.sidebarService.cargarMenu().subscribe( response => this.menus = response );
   }
 
   logout() {
