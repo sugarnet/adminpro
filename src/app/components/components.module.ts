@@ -7,18 +7,15 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { GraficoDonaComponent } from './grafico-dona/grafico-dona.component';
 import { IncrementadorComponent } from './incrementador/incrementador.component';
-import { ModalUploadComponent } from './modal-upload/modal-upload.component';
 
 @NgModule({
     declarations: [
         GraficoDonaComponent,
-        IncrementadorComponent,
-        ModalUploadComponent
+        IncrementadorComponent
     ],
     exports: [
         IncrementadorComponent,
-        GraficoDonaComponent,
-        ModalUploadComponent
+        GraficoDonaComponent
     ],
     imports: [
         CommonModule,

@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoginGuard,
          AdminGuard,
+         VerificaTokenGuard,
          SettingsService,
          SharedService,
          SidebarService,
@@ -22,6 +23,7 @@ import { LoginGuard,
   providers: [
     LoginGuard,
     AdminGuard,
+    VerificaTokenGuard,
     SettingsService,
     SharedService,
     SidebarService,

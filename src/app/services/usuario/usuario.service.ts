@@ -120,12 +120,12 @@ export class UsuarioService {
       } );
     } );
   }
-
+  
   getUsuarios( desde = 0 ) {
     const url = `${ URL_SERVICIOS }/usuario?desde=${ desde }`;
     return this.http.get(url);
   }
-
+  
   buscarUsuarios( termino: string ) {
     const url = `${ URL_SERVICIOS }/busqueda/coleccion/usuarios/${ termino }`;
     return this.http.get(url).pipe( map( (response: any) => response.usuarios ) );
@@ -134,5 +134,14 @@ export class UsuarioService {
   borrarUsuario( id: string ) {
     const url = `${ URL_SERVICIOS }/usuario/${ id }?token=${ this.token }`;
     return this.http.delete(url).pipe( map( () => true) );
+  }
+  
+  renewToken() {
+    const url = `${ URL_SERVICIOS }/login/renewtoken?token=${ this.token }`;
+    return this.http.get(url).pipe( map( (response: any) => {
+      this.token = response.token;
+      this.guardarStorage(this.usuario._id, this.token, this.usuario, this.menu);
+    } ) );
+
   }
 }
